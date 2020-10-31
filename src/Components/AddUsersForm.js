@@ -45,9 +45,9 @@ const AddUsersForm = ({ formData }) => {
   const handleClick = (e, eventObj) => {
     // this is not the best idea, but Im so tired!
     // we can bring other case if we know the schema!
-    switch (eventObj.event) {
+    switch (eventObj?.event) {
       case 'alert':
-        alert(eventObj.text)
+        alert(eventObj?.text)
     }
   }
 
