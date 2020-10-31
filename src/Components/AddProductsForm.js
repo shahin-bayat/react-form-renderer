@@ -2,13 +2,8 @@ import './styles.css'
 import React, { useState } from 'react'
 import axios from 'axios'
 
-const AddProductsForm = () => {
-  const [product, setProduct] = useState({
-    productname: '',
-    count: '',
-  })
-
-  const { productname, count } = product
+const AddProductsForm = ({ formData }) => {
+  const [product, setProduct] = useState({})
 
   const handleChange = e => {
     setProduct({ ...product, [e.target.name]: e.target.value })
@@ -23,29 +18,34 @@ const AddProductsForm = () => {
       console.error('the url is probably not valid again! :D')
     }
   }
+
+  const renderForm = formData => {
+    const userFormData = formData.filter(data => data.form === 'product')
+    let { createurl, field, titleform } = userFormData[0]
+    return (
+      <form onSubmit={e => handleSubmit(e, createurl)}>
+        <h1>{titleform}</h1>
+        {field.map(f => {
+          return (
+            <div className='form-group' key={f.name}>
+              <label htmlFor={f.name}>{f.title}</label>
+              <input
+                type={f.type}
+                id={f.name}
+                name={f.name}
+                onChange={(e, fieldName) => handleChange(e, fieldName)}
+                {...f.option}
+              />
+            </div>
+          )
+        })}
+        <input type='submit' value={titleform} />
+      </form>
+    )
+  }
   return (
     <div className='add-user'>
-      <h1>اضافه کردن محصول</h1>
-      <form onSubmit={handleSubmit} className='form-group'>
-        <label htmlFor='productname'>نام محصول</label>
-        <input
-          type='text'
-          name='productname'
-          id='productname'
-          value={productname}
-          onChange={handleChange}
-        />
-        <label htmlFor='count'>تعداد</label>
-        {/* is mentioned to have type=text but type=number would make more sense! */}
-        <input
-          type='text'
-          name='count'
-          id='count'
-          value={count}
-          onChange={handleChange}
-        />
-        <input type='submit' value='ثبت' />
-      </form>
+      {formData.length > 0 ? renderForm(formData) : <pre>Loading Form... </pre>}
     </div>
   )
 }

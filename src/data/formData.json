@@ -1,0 +1,61 @@
+[
+  {
+    "form": "users",
+    "path": "addusers",
+    "titleform": "اضافه کردن کاربر",
+    "field": [
+      {
+        "name": "fullname",
+        "event": [
+          {
+            "name": "click",
+            "event": "alert",
+            "text": "test message"
+          }
+        ],
+        "title": "نام کاربر",
+        "type": "text",
+        "option": {
+          "required": "true"
+        }
+      },
+      {
+        "name": "password",
+        "title": "پسورد",
+        "type": "password"
+      },
+      {
+        "name": "gender",
+        "title": "جنسیت",
+        "type": "radio",
+        "option": [
+          {
+            "id": "2",
+            "name": "women"
+          }
+        ]
+      }
+    ],
+    "createurl": "test.com/api/users/testadd",
+    "readurl": "test.com/api/users/testread"
+  },
+  {
+    "form": "product",
+    "path": "addproduct",
+    "titleform": "اضافه کردن محصول",
+    "field": [
+      {
+        "name": "productname",
+        "title": "نام محصول",
+        "type": "text"
+      },
+      {
+        "name": "count",
+        "title": "تعداد",
+        "type": "text"
+      }
+    ],
+    "createurl": "test.com/api/product/testadd",
+    "readurl": "test.com/api/product/testread"
+  }
+]
